@@ -1,0 +1,110 @@
+/*Map*/
+.map-container {
+  height: 700px;
+}
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+
+  /*margin: 12px;*/
+  border-radius: 4px;
+}
+/*Map*/
+ul li{
+  list-style: none;
+}
+
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.logo{
+  height: 50px;
+  width: 50px;
+  margin: 16px;
+}
+/* 聊天框 */
+.chat-input{
+  border: 1px solid #ddd;
+  background: #ddd;
+  width: 80%;
+  height: 2rem;
+}
+
+
+/* window */
+
+
+/* window */
+
+/* messagelist */
+
+.messages-text-lis .time {
+  font-size: 12px;
+  color: #999;
+  margin-left: 15px;
+}
+
+.messages-text-lis p {
+  position: relative;
+  width: 85%;
+  margin-top: 15px;
+  border-radius: 3px;
+  background-color: #a0d468;
+  color: #fff;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 26px;
+}
+
+.messages-text-lis p:before {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  content: '';
+  top: -14px;
+  left: 10px;
+  border-top-width: 0;
+  border-bottom-color: #a0d468;
+  border-width: 7px;
+}
+
+.sent-text-lis p {
+  position: relative;
+  width: 85%;
+  margin-top: 15px;
+  border-radius: 3px;
+  background-color: #0d67ec;
+  color: #fff;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 26px;
+}
+
+.sent-text-lis p:before {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  content: '';
+  top: -14px;
+  left: 690px;
+  border-top-width: 0;
+  border-bottom-color: #0d67ec;
+  border-width: 7px;
+}
+
+
+
+/* messagelist */

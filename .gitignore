@@ -1,0 +1,6 @@
+.idea/
+backend/node_modules/
+backend/yarn.lock
+ui/node_modules/
+ui/yarn.lock
+
