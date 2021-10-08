@@ -64,7 +64,7 @@ const Main = (props) => {
                 </Menu>
             </Sider>
             <Layout className="site-layout">
-                <Header className="site-layout-background" style={{padding: 0}}/>
+                {/*<Header className="site-layout-background" style={{padding: 0}}/>*/}
                     {/*<DataContext.Provider ></DataContext.Provider>*/}
                         <Window tabNum={tab} username={username} />
 

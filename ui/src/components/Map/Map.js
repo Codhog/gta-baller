@@ -1,27 +1,95 @@
-
-
+//再写一个一模一样的这个放在Files
+//点击可以上传坐标至firebase
 import * as React from 'react';
-import ReactMapGL, {Popup} from 'react-map-gl';
+import {useState} from 'react';
+import MapGL, {
+    Popup,
+    NavigationControl,
+    FullscreenControl,
+    ScaleControl,
+    GeolocateControl
+} from 'react-map-gl';
+
+import Pins from './pins';
+import CityInfo from './city-info';
+
+import CITIES from './cities.json';
+//"city":"New York","population":,"image":,"state":,"latitude":,"longitude":
+
+const TOKEN =
+    'pk.eyJ1IjoiY2hlbno4NyIsImEiOiJja3VoYjB1ODgyZDJzMm5rNm90NzRjenp4In0.kTrjt38_JFTjLindaWKt8w';
+
+
+const geolocateStyle = {
+    top: 0,
+    left: 0,
+    padding: '10px'
+};
+
+const fullscreenControlStyle = {
+    top: 36,
+    left: 0,
+    padding: '10px'
+};
+
+const navStyle = {
+    top: 72,
+    left: 0,
+    padding: '10px'
+};
+
+const scaleControlStyle = {
+    bottom: 36,
+    left: 0,
+    padding: '10px'
+};
 
 export default function Map() {
-    const [viewport, setViewport] = React.useState({
-        longitude: -122.45,
-        latitude: 37.78,
-        zoom: 14
+    const [viewport, setViewport] = useState({
+        latitude: 40,
+        longitude: -100,
+        zoom: 3.5,
+        bearing: 0,
+        pitch: 0
     });
-    const [showPopup, togglePopup] = React.useState(false);
+    const [popupInfo, setPopupInfo] = useState(null);
+
+    const setFreePop = () =>{
+
+    }
 
     return (
-        <ReactMapGL {...viewport} width="100vw" height="100vh" onViewportChange={setViewport}>
-            {showPopup && <Popup
-                latitude={37.78}
-                longitude={-122.41}
-                closeButton={true}
-                closeOnClick={false}
-                onClose={() => togglePopup(false)}
-                anchor="top" >
-                <div>You are here</div>
-            </Popup>}
-        </ReactMapGL>
+        <>
+            <MapGL
+                {...viewport}
+                width="100%"
+                height="100%"
+                mapStyle="mapbox://styles/mapbox/dark-v9"
+                onViewportChange={setViewport}
+                mapboxApiAccessToken={TOKEN}
+                onClick={setFreePop}
+            >
+                <Pins data={CITIES}  onClick={setPopupInfo}/>
+
+                {popupInfo && (
+                    <Popup
+                        tipSize={5}
+                        anchor="top"
+                        longitude={popupInfo.longitude}
+                        latitude={popupInfo.latitude}
+                        closeOnClick={false}
+                        onClose={setPopupInfo}
+                    >
+                        <CityInfo info={popupInfo} />
+                    </Popup>
+                )}
+
+                <GeolocateControl style={geolocateStyle} />
+                <FullscreenControl style={fullscreenControlStyle} />
+                <NavigationControl style={navStyle} />
+                <ScaleControl style={scaleControlStyle} />
+            </MapGL>
+
+        </>
     );
 }
