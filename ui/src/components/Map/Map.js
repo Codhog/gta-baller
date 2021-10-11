@@ -11,7 +11,7 @@ import MapGL, {
 } from 'react-map-gl';
 
 import Pins from './pins';
-import CityInfo from './city-info';
+import CourtInfo from './court-info';
 
 import CITIES from './cities.json';
 //"city":"New York","population":,"image":,"state":,"latitude":,"longitude":
@@ -46,9 +46,9 @@ const scaleControlStyle = {
 
 export default function Map() {
     const [viewport, setViewport] = useState({
-        latitude: 40,
-        longitude: -100,
-        zoom: 3.5,
+        latitude: 43.85195,
+        longitude: -79.26603,
+        zoom: 9,
         bearing: 0,
         pitch: 0
     });
@@ -80,7 +80,7 @@ export default function Map() {
                         closeOnClick={false}
                         onClose={setPopupInfo}
                     >
-                        <CityInfo info={popupInfo} />
+                        <CourtInfo info={popupInfo} />
                     </Popup>
                 )}
 
