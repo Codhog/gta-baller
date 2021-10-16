@@ -4,6 +4,7 @@ import webSocket from 'socket.io-client'
 import Window from "./Window";
 import vchatlogo from "../imgs/vchat.png";
 import axios from "axios";
+// import firebase from "./firebase";
 import {Layout, Menu, Button} from "antd";
 import {
     DesktopOutlined,

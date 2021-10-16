@@ -1,7 +1,7 @@
 //再写一个一模一样的这个放在Files
 //点击可以上传坐标至firebase
 import * as React from 'react';
-import {useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import MapGL, {
     Popup,
     NavigationControl,
@@ -9,6 +9,8 @@ import MapGL, {
     ScaleControl,
     GeolocateControl
 } from 'react-map-gl';
+import Geocoder from 'react-map-gl-geocoder'
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 
 import Pins from './pins';
 import CourtInfo from './court-info';
@@ -54,21 +56,29 @@ export default function Map() {
     });
     const [popupInfo, setPopupInfo] = useState(null);
 
-    const setFreePop = () =>{
-
-    }
-
+    const mapRef = useRef();
+    const handleViewportChange = useCallback(
+        (newViewport) => setViewport(newViewport),
+        []
+    );
     return (
         <>
             <MapGL
+                ref={mapRef}
                 {...viewport}
                 width="100%"
                 height="100%"
                 mapStyle="mapbox://styles/mapbox/dark-v9"
                 onViewportChange={setViewport}
                 mapboxApiAccessToken={TOKEN}
-                onClick={setFreePop}
+
             >
+                <Geocoder
+                    mapRef={mapRef}
+                    onViewportChange={setViewport}
+                    mapboxApiAccessToken={TOKEN}
+                    position="top-right"
+                />
                 <Pins data={CITIES}  onClick={setPopupInfo}/>
 
                 {popupInfo && (

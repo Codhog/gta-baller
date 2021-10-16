@@ -1,9 +1,8 @@
 [{
   "court":"Aaniin","area":"Markham","latitude":43.85195211602877,"longitude":-79.26603714962228,"description": "A brand new facility for Markham community.",
-  "id": 1, "indoor": "yes"
+  "id": 1, "indoor": "yes", "headcount": 4
 },{
   "court":"Milliken Mills High School","area":"Markham","latitude":43.83715934387034,"longitude":-79.30439642637315,"description": "A Highschool with painted outdoor court.",
   "id": 2, "indoor": "no"
-},
-  {"court":"New York","population":"8,175,133","image":"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/240px-Above_Gotham.jpg","state":"New York","latitude":40.6643,"longitude":-73.9385}
+}
 ]
