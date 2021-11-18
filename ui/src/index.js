@@ -3,21 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Main from "./components/Main";
-// import {socket} from "./components/socket";
 import {getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
-import {initializeApp} from 'firebase/app';
 import {useAuthState} from 'react-firebase-hooks/auth';
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDlBFrUTOF7J6NvJlqeABSdtYKOr4qgiXs",
-//     authDomain: "gta-baller.firebaseapp.com",
-//     projectId: "gta-baller",
-//     storageBucket: "gta-baller.appspot.com",
-//     messagingSenderId: "184696766878",
-//     appId: "1:184696766878:web:af690da82b49bf3a2c968f",
-//     measurementId: "G-QZ685H3BSB"
-// }
-// const app = initializeApp(firebaseConfig);
+export const AuthContext = React.createContext('')
+
 const Login = () => {
     const auth = getAuth();
     const [user] = useAuthState(auth);
@@ -47,7 +37,11 @@ const Login = () => {
         // user.displayName
     }
     return (
-        user ? <Main userName={user}/> : <form>
+        user ?
+            <AuthContext.Provider value={user}>
+                <Main userName={user}/>
+            </AuthContext.Provider>
+             : <form>
             <button type="primary" style={{margin: 20}} onClick={signIn}>
                 登录
             </button>

@@ -31,13 +31,9 @@ const CourtInfo = props => {
 
 return (
         < >
-    {
-        selectedImg(info.court)
-    }
-    {
-        MeetEvent(info)
-    }
-</>
+            {selectedImg(info.court)}
+            <MeetEvent info={info} />
+    </>
 );
 };
 
