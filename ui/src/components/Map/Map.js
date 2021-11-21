@@ -13,7 +13,7 @@ import Geocoder from 'react-map-gl-geocoder'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 
 import Pins from './pins';
-import CourtInfo from './court-info';
+import MapPopup from './MapPopup';
 
 import CITIES from './cities.json';
 //"city":"New York","population":,"image":,"state":,"latitude":,"longitude":
@@ -83,14 +83,15 @@ export default function Map() {
 
                 {popupInfo && (
                     <Popup
-                        tipSize={5}
+                        className="map-pop-"
+                        tipSize={8}
                         anchor="top"
                         longitude={popupInfo.longitude}
                         latitude={popupInfo.latitude}
                         closeOnClick={false}
                         onClose={setPopupInfo}
                     >
-                        <CourtInfo info={popupInfo} />
+                        <MapPopup info={popupInfo} />
                     </Popup>
                 )}
 

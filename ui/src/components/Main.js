@@ -37,7 +37,7 @@ const Main = (props) => {
         <Layout style={{minHeight: "100vh"}}>
             <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
                 <img className="logo" alt="" src={vchatlogo}/>
-                <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+                <Menu theme="dark"  mode="inline">
                     <Menu.Item key="1" icon={<PieChartOutlined/>} onClick={()=>handleCLicked(1)}>
                         Players Map
                     </Menu.Item>

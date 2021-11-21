@@ -1,3 +1,4 @@
+@import 'styles/MapPopup.scss';
 /*Map*/
 .map-container {
   height: 100vh;
@@ -13,16 +14,23 @@
 }
 
 .mapboxgl-popup-content{
-  width:300px
+  /*width:600px*/
 }
 
 .profileImg{
   width:200px
 }
 
+
+/*Map Pop Up*/
+.td-description{
+  width: 100px;
+}
+/*Map Pop Up*/
 table, th, td {
   border: 1px solid white;
   border-collapse: collapse;
+  text-align: center;
 }
 th, first-child {
   background-color: #96D4D4;

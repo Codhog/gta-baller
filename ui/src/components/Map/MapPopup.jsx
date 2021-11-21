@@ -1,5 +1,8 @@
+import * as React from 'react';
+import imgs from './imgs/imgs';
+import {Button, Col, Row} from 'antd';
+import MeetEvent from "./MeetEvent";
 import {useContext, useState} from "react";
-import {Button, Row} from "antd";
 import { initializeApp } from 'firebase/app';
 import {getDatabase, ref, child, get, set, update} from "firebase/database";
 import firebaseConfig from '../firebase'
@@ -7,8 +10,12 @@ import {AuthContext} from '../../index'
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-const MeetEvent = (props) => {
-    const {info} = props
+
+const MapPopup = props => {
+    const {info} = props;
+    let courtName = info.court
+    let pathName = courtName.replace(/\s+/g, '_').toLowerCase()
+
     const [go, setGo] = useState(false)
     const userName = useContext(AuthContext);
     const userEmail = userName.email.split('@')[0]
@@ -47,33 +54,46 @@ const MeetEvent = (props) => {
     };
 
     return (
-        <>
+        < >
+            <Row justify="end">
+                <Col span={16}><img
+                    alt={`${courtName}`}
+                    className="profileImg"
+                    src={imgs[`${pathName}`]}/></Col>
+                <Col span={8} >
+                    <h5>🔥Popularity</h5>
+                </Col>
+            </Row>
             <Row>
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <th>Area</th>
-                        <th>Description</th>
-                        <th>Indoor?</th>
-
-                    </tr>
-                    <tr>
-                        <td>{info.court}</td>
-                        <td>{info.area}</td>
-                        <td className='td-description'>{info.description}</td>
-                        <td>{info.indoor}</td>
-                    </tr>
-                    </tbody>
-
-
-                </table>
+                <Col span={24}>
+                    <MeetEvent info={info}/>
+                </Col>
             </Row>
 
 
+            <Row>
+                {
+                    go ?
+                        <>
+                            <Button onClick={handleNotIntClick}>Not Interested</Button>
+                            <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
+                        </>
+
+                        :
+                        <>
+                            <Button danger onClick={handleNotIntClick}>Not Interested</Button>
+                            <Button onClick={handleIntClick}>I'm interested</Button>
+                        </>
+
+                }
+
+
+            </Row>
+
+
+
         </>
-    )
+    );
+};
 
-}
-
-export default MeetEvent
+export default React.memo(MapPopup);
