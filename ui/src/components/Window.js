@@ -21,7 +21,7 @@ const Window = (props) => {
     const sendChat = () => {
         // 获取 谷歌 用户 数据 头像
     }
-
+    // SELECTED component 可以指选择的几个框 ‘欢迎使用’  ‘ 球员地图 ’等
     const selectedComponent = () => {
         console.log('tabnum', props.tabNum)
         switch (props.tabNum) {
@@ -38,13 +38,10 @@ const Window = (props) => {
                     >
                     </Content>
                 </>
-                break;
             case 1:
                 return <Map />
-                break;
             case 3:
                 return
-                break;
             default:
                 return <>
                     <Header style={{backgroundColor: "white"}}>Loading...</Header>
