@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./index.scss";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Main from "./components/Main";
 import {getAuth, signInWithPopup, GoogleAuthProvider} from "firebase/auth";

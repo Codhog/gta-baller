@@ -65,9 +65,7 @@ const MapPopup = props => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24}>
-                    <MeetEvent info={info}/>
-                </Col>
+                <MeetEvent info={info}/>
             </Row>
 
 
