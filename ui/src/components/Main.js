@@ -13,10 +13,11 @@ import {
     TeamOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import {DataContext} from "./Main1";
 
 const {Header, Content, Footer, Sider} = Layout;
 const {SubMenu} = Menu;
+
+export const DataContext = React.createContext()
 const Main = (props) => {
     const [collapsed, setCollapsed] = useState(false)
     const [tab, setTab] = useState(0)
@@ -27,11 +28,7 @@ const Main = (props) => {
 
     }
     const handleCLicked = (num) => {
-        switch (num){
-            case 1:
-                setTab(1)
-                break;
-        }
+        setTab(num)
     }
     return (
         <Layout style={{minHeight: "100vh"}}>
@@ -44,8 +41,16 @@ const Main = (props) => {
                     <Menu.Item key="2" icon={<DesktopOutlined/>}>
                         My Player
                     </Menu.Item>
-                    <SubMenu key="sub1" icon={<UserOutlined/>} title="User">
+                    <SubMenu key="sub1" icon={<UserOutlined/>} title="Chat with Friends" >
 
+                        <Menu.Item
+                            key={'30'}
+                            onClick={()=>handleCLicked(3)}
+                        >
+                            Admin
+                        </Menu.Item>
+
+                        {/*Legacy Remember*/}
                         {/*<Menu.Item*/}
                         {/*    key={key + 3}*/}
                         {/*    title={obj.friendName}*/}
@@ -53,6 +58,7 @@ const Main = (props) => {
                         {/*>*/}
                         {/*    {obj.friendName}*/}
                         {/*</Menu.Item>*/}
+                        {/*Legacy*/}
 
                     </SubMenu>
                     <SubMenu key="sub2" icon={<TeamOutlined/>} title="Team">

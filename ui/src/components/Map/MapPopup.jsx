@@ -1,7 +1,8 @@
 import * as React from 'react';
 import imgs from './imgs/imgs';
-import {Button, Col, Row} from 'antd';
+import {Button, Col, Row, Divider } from 'antd';
 import MeetEvent from "./MeetEvent";
+import {Chart} from "./Chart/Chart"
 import {useContext, useState} from "react";
 import { initializeApp } from 'firebase/app';
 import {getDatabase, ref, child, get, set, update} from "firebase/database";
@@ -13,8 +14,8 @@ const database = getDatabase(app);
 
 const MapPopup = props => {
     const {info} = props;
-    let courtName = info.court
-    let pathName = courtName.replace(/\s+/g, '_').toLowerCase()
+    const courtName = info.court
+    const pathName = courtName.replace(/\s+/g, '_').toLowerCase()
 
     const [go, setGo] = useState(false)
     const userName = useContext(AuthContext);
@@ -54,43 +55,88 @@ const MapPopup = props => {
     };
 
     return (
-        < >
-            <Row justify="end">
-                <Col span={16}><img
-                    alt={`${courtName}`}
-                    className="profileImg"
-                    src={imgs[`${pathName}`]}/></Col>
-                <Col span={8} >
-                    <h5>🔥Popularity</h5>
+        <>
+         {/*   header*/}
+         <Row>
+             <Divider>{courtName}</Divider>
+             </Row>
+            {/*body*/}
+                <Row align="middle">
+                    <Col span={10} push={1}>
+                            <img alt={{courtName}}
+                                 className="profileImg"
+                                 src={imgs[`${pathName}`]}/>
+                    </Col>
+                    <Col span={14} pull={1}>
+                        <MeetEvent info={info}/>
+                    </Col>
+                </Row>
+
+            <Divider>Popularity of last 7 days</Divider>
+            <Row justify="space-around" align="middle">
+                <Chart />
+            </Row>
+            <Divider>Are you coming?</Divider>
+            <Row>
+                <Col span={10} offset={8}>
+                    {
+                        go ?
+                            <>
+                                <Button onClick={handleNotIntClick}>Not Interested</Button>
+                                <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
+                            </>
+
+                            :
+                            <>
+                                <Button danger onClick={handleNotIntClick}>Not Interested</Button>
+                                <Button onClick={handleIntClick}>I'm interested</Button>
+                            </>
+
+                    }
                 </Col>
-            </Row>
-            <Row>
-                <MeetEvent info={info}/>
-            </Row>
-
-
-            <Row>
-                {
-                    go ?
-                        <>
-                            <Button onClick={handleNotIntClick}>Not Interested</Button>
-                            <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
-                        </>
-
-                        :
-                        <>
-                            <Button danger onClick={handleNotIntClick}>Not Interested</Button>
-                            <Button onClick={handleIntClick}>I'm interested</Button>
-                        </>
-
-                }
-
 
             </Row>
-
-
-
         </>
+        // < >
+        //     <Row justify="end">
+        //         <Col span={16}><img
+        //             alt={`${courtName}`}
+        //             className="profileImg"
+        //             src={imgs[`${pathName}`]}/></Col>
+        //         <Col span={7} offset={1} >
+        //             <div className="popularity-timer">
+        //                 <h5>🔥Popularity</h5>
+        //             </div>
+        //
+        //         </Col>
+        //     </Row>
+        //     <Row>
+        //         <MeetEvent info={info}/>
+        //     </Row>
+        //
+        //
+        //     <Row>
+        //         {
+        //             go ?
+        //                 <>
+        //                     <Button onClick={handleNotIntClick}>Not Interested</Button>
+        //                     <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
+        //                 </>
+        //
+        //                 :
+        //                 <>
+        //                     <Button danger onClick={handleNotIntClick}>Not Interested</Button>
+        //                     <Button onClick={handleIntClick}>I'm interested</Button>
+        //                 </>
+        //
+        //         }
+        //
+        //
+        //     </Row>
+        //
+        //
+        //
+        // </>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { memo, useRef, useEffect, useMemo, useContext } from "react";
 import socketIOClient from "socket.io-client";
-import {DataContext} from "./Main1"
+import {DataContext} from "./Main"
 
 
 const MessageList = (props) => {

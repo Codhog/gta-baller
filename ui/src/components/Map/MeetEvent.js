@@ -52,17 +52,16 @@ const MeetEvent = (props) => {
                 <table>
                     <tbody>
                     <tr>
-                        <th>Name</th>
                         <th>Area</th>
                         <th>Description</th>
                         <th>Indoor?</th>
-
+                        <th>Free?</th>
                     </tr>
                     <tr>
-                        <td>{info.court}</td>
                         <td>{info.area}</td>
                         <td className='td-description'>{info.description}</td>
                         <td>{info.indoor}</td>
+                        <td>{info.free}</td>
                     </tr>
                     </tbody>
 

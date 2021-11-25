@@ -22,18 +22,22 @@
 
 
 /*Map Pop Up*/
-.td-description{
-  width: 100px;
-}
-/*Map Pop Up*/
 table, th, td {
-  border: 1px solid white;
-  border-collapse: collapse;
   text-align: center;
+  word-wrap: break-word;
 }
-th, first-child {
+th{
   background-color: #96D4D4;
 }
+td:first-of-type{
+  width: 80px;
+}
+td:nth-of-type(3){
+  width: 100px;
+
+}
+/*Map Pop Up*/
+
 
 /*Map*/
 ul li{
