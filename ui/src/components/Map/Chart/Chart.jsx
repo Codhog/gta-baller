@@ -31,18 +31,19 @@ export const options = {
 
 const labels = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saterday', 'sunday'];
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Popularity of last 7 days',
-            data: Array.from({length: 7}, () => Math.floor(Math.random() * 7)),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        }
-    ],
-};
+// export
 
 export function Chart() {
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Popularity of last 7 days',
+                data: Array.from({length: 7}, () => Math.floor(Math.random() * 7)),
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }
+        ],
+    };
     return <Line options={options} data={data} type="line" />;
 }

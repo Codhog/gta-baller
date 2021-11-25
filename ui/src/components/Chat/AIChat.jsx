@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '@chatui/core/es/styles/index.less';
 // 引入组件
 import Chat, { Bubble, useMessages } from '@chatui/core';
@@ -6,8 +6,14 @@ import Chat, { Bubble, useMessages } from '@chatui/core';
 import '@chatui/core/dist/index.css';
 
 const AIChat = () => {
-    const { messages, appendMsg, setTyping } = useMessages([]);
+    const { messages, appendMsg,prependMsgs, setTyping } = useMessages([]);
 
+    useEffect(()=>{
+        appendMsg({
+            type: 'text',
+            content: { text: 'Welcome to GTA-baller' },
+        })
+    }, [])
     function handleSend(type, val) {
         if (type === 'text' && val.trim()) {
             appendMsg({
