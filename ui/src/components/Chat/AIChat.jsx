@@ -40,6 +40,8 @@ const AIChat = () => {
 
     return (
         <Chat
+            locale="en-US"
+            placeholder="Type here"
             navbar={{ title: 'AI Buddy' }}
             messages={messages}
             renderMessageContent={renderMessageContent}
