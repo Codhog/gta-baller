@@ -4,7 +4,7 @@ import webSocket from 'socket.io-client'
 import Window from "./Window";
 import vchatlogo from "../imgs/vchat.png";
 import axios from "axios";
-// import firebase from "./firebase";
+import firebase from "./firebase";
 import {Layout, Menu, Button} from "antd";
 import {
     DesktopOutlined,
@@ -14,7 +14,7 @@ import {
     UserOutlined,
 } from "@ant-design/icons";
 
-const {Header, Content, Footer, Sider} = Layout;
+const {Footer, Sider} = Layout;
 const {SubMenu} = Menu;
 
 export const DataContext = React.createContext()
@@ -61,6 +61,7 @@ const Main = (props) => {
                         {/*Legacy*/}
 
                     </SubMenu>
+                    {/*TODO*/}
                     <SubMenu key="sub2" icon={<TeamOutlined/>} title="Team">
                         <Menu.Item key="80">Team 1</Menu.Item>
                         <Menu.Item key="81">Team 2</Menu.Item>

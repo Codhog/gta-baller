@@ -1,7 +1,7 @@
 //再写一个一模一样的这个放在Files
 //点击可以上传坐标至firebase
 import * as React from 'react';
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import MapGL, {
     Popup,
     NavigationControl,
@@ -15,7 +15,8 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import Pins from './pins';
 import MapPopup from './MapPopup';
 
-import CITIES from './cities.json';
+import {get, child, update, set} from "firebase/database";
+import {dbRef, database} from '../firebase'
 //"city":"New York","population":,"image":,"state":,"latitude":,"longitude":
 
 const TOKEN =
@@ -47,6 +48,10 @@ const scaleControlStyle = {
 };
 
 export default function Map() {
+
+    const [mapData, setMapData] = useState(null)
+
+
     const [viewport, setViewport] = useState({
         latitude: 43.85195,
         longitude: -79.26603,
@@ -57,10 +62,19 @@ export default function Map() {
     const [popupInfo, setPopupInfo] = useState(null);
 
     const mapRef = useRef();
-    const handleViewportChange = useCallback(
-        (newViewport) => setViewport(newViewport),
-        []
-    );
+
+    useEffect(()=>{
+        get(child(dbRef, 'courtInfo/')).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val(), 'mapData')
+                setMapData(snapshot.val());
+            } else {
+                console.log('nop data')
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }, [])
     return (
         <>
             <MapGL
@@ -79,11 +93,11 @@ export default function Map() {
                     mapboxApiAccessToken={TOKEN}
                     position="top-right"
                 />
-                <Pins data={CITIES}  onClick={setPopupInfo}/>
+                {mapData && <Pins data={mapData}  onClick={setPopupInfo}/>}
+
 
                 {popupInfo && (
                     <Popup
-                        className="map-pop-"
                         tipSize={8}
                         anchor="top"
                         longitude={popupInfo.longitude}

@@ -4,12 +4,10 @@ import {Button, Col, Row, Divider } from 'antd';
 import MeetEvent from "./MeetEvent";
 import {Chart} from "./Chart/Chart"
 import {useContext, useState} from "react";
-import { initializeApp } from 'firebase/app';
-import {getDatabase, ref, child, get, set, update} from "firebase/database";
-import firebaseConfig from '../firebase'
+import {ref, onValue, update} from "firebase/database";
+import {database} from '../firebase'
 import {AuthContext} from '../../index'
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+
 
 
 const MapPopup = props => {
@@ -27,23 +25,27 @@ const MapPopup = props => {
         console.log(userName.email, 'sada', typeof info.id)
         setGo(true);
 
-
-        get(child(ref(database), 'courtHeadCount/'+info.id)).then((snapshot) => {
-            if (snapshot.exists()) {
-                console.log(snapshot.val())
-                update(ref(database, 'courtHeadCount/'+info.id), {
-                    'headCount': snapshot.val().headCount+1
-                })
-            } else {
-                set(ref(database, 'courtHeadCount/'+info.id), {
-                    'username':userEmail,
-                    'courtName': info.court,
-                    'headCount': 1
-                })
-            }
-        }).catch((error) => {
-            console.error(error);
+        const headCountRef = ref(database, 'courtInfo/'+info.id)
+        onValue(headCountRef, (snapshot) => {
+            console.log('截图', snapshot.val())
+            update['courtInfo/'+info.id+'/manNum'] = snapshot.val() + 1
         });
+        // get(child(ref(database), 'courtInfo/'+info.id)).then((snapshot) => {
+        //     if (snapshot.exists()) {
+        //         console.log(snapshot.val())
+        //         update(ref(database, 'courtHeadCount/'+info.id), {
+        //             'headCount': snapshot.val().headCount+1
+        //         })
+        //     } else {
+        //         set(ref(database, 'courtHeadCount/'+info.id), {
+        //             'username':userEmail,
+        //             'courtName': info.court,
+        //             'headCount': 1
+        //         })
+        //     }
+        // }).catch((error) => {
+        //     console.error(error);
+        // });
 
 
 
@@ -68,27 +70,31 @@ const MapPopup = props => {
                                  src={imgs[`${pathName}`]}/>
                     </Col>
                     <Col span={14} pull={1}>
-                        <MeetEvent info={info}/>
+                        <MeetEvent sonInfo={info}/>
                     </Col>
                 </Row>
 
-            <Divider>Popularity of last 7 days</Divider>
+            <Divider>Popularity of last 7 days </Divider>
             <Row justify="space-around" align="middle">
-                <Chart />
+                <div className='chart-wrapper'>
+                    <Chart />
+                </div>
             </Row>
             <Divider>Are you coming?</Divider>
             <Row>
-                <Col span={10} offset={8}>
+                <Col span={12} offset={7}>
                     {
                         go ?
                             <>
                                 <Button onClick={handleNotIntClick}>Not Interested</Button>
+                                <span>&emsp;</span>
                                 <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
                             </>
 
                             :
                             <>
                                 <Button danger onClick={handleNotIntClick}>Not Interested</Button>
+                                <span>&emsp;</span>
                                 <Button onClick={handleIntClick}>I'm interested</Button>
                             </>
 
@@ -97,46 +103,6 @@ const MapPopup = props => {
 
             </Row>
         </>
-        // < >
-        //     <Row justify="end">
-        //         <Col span={16}><img
-        //             alt={`${courtName}`}
-        //             className="profileImg"
-        //             src={imgs[`${pathName}`]}/></Col>
-        //         <Col span={7} offset={1} >
-        //             <div className="popularity-timer">
-        //                 <h5>🔥Popularity</h5>
-        //             </div>
-        //
-        //         </Col>
-        //     </Row>
-        //     <Row>
-        //         <MeetEvent info={info}/>
-        //     </Row>
-        //
-        //
-        //     <Row>
-        //         {
-        //             go ?
-        //                 <>
-        //                     <Button onClick={handleNotIntClick}>Not Interested</Button>
-        //                     <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
-        //                 </>
-        //
-        //                 :
-        //                 <>
-        //                     <Button danger onClick={handleNotIntClick}>Not Interested</Button>
-        //                     <Button onClick={handleIntClick}>I'm interested</Button>
-        //                 </>
-        //
-        //         }
-        //
-        //
-        //     </Row>
-        //
-        //
-        //
-        // </>
     );
 };
 

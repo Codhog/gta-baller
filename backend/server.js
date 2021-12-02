@@ -15,7 +15,7 @@ const path = require("path");
 
 app.use(cors());
 const server = http.createServer(app);
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDlBFrUTOF7J6NvJlqeABSdtYKOr4qgiXs",
     authDomain: "gta-baller.firebaseapp.com",
     projectId: "gta-baller",

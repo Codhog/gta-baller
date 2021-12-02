@@ -6,8 +6,6 @@ import {Content, Header} from "antd/es/layout/layout";
 
 
 const Window = (props) => {
-
-
     // SELECTED component 可以指选择的几个框 ‘欢迎使用’  ‘ 球员地图 ’等
     const selectedComponent = () => {
         console.log('tabnum', props.tabNum)
@@ -29,6 +27,8 @@ const Window = (props) => {
                 return <Map />
             case 3:
                 return <AIChat />
+            case 4:
+                return <AIChat />
             default:
                 return <>
                     <Header style={{backgroundColor: "white"}}>Loading...</Header>
@@ -48,8 +48,6 @@ const Window = (props) => {
 
     return (
         selectedComponent()
-
-
     );
 
 }
