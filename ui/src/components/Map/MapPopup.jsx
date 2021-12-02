@@ -3,7 +3,7 @@ import imgs from './imgs/imgs';
 import {Button, Col, Row, Divider } from 'antd';
 import MeetEvent from "./MeetEvent";
 import {Chart} from "./Chart/Chart"
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {ref, onValue, update} from "firebase/database";
 import {database} from '../firebase'
 import {AuthContext} from '../../index'
@@ -15,8 +15,11 @@ const MapPopup = props => {
     const courtName = info.court
     const pathName = courtName.replace(/\s+/g, '_').toLowerCase()
 
+    //去不去
     const [go, setGo] = useState(false)
+    const [goNum, setGoNum] = useState(null)
     const userName = useContext(AuthContext);
+    const headCountRef = ref(database, 'courtInfo/'+info.id+'/manNum')
     const userEmail = userName.email.split('@')[0]
     console.log('UsErName', userName)
     const handleIntClick = () => {
@@ -25,11 +28,11 @@ const MapPopup = props => {
         console.log(userName.email, 'sada', typeof info.id)
         setGo(true);
 
-        const headCountRef = ref(database, 'courtInfo/'+info.id)
-        onValue(headCountRef, (snapshot) => {
-            console.log('截图', snapshot.val())
-            update['courtInfo/'+info.id+'/manNum'] = snapshot.val() + 1
-        });
+
+        //TODO 错误的
+
+
+        update['courtInfo/'+info.id+'/manNum'] = goNum + 1
         // get(child(ref(database), 'courtInfo/'+info.id)).then((snapshot) => {
         //     if (snapshot.exists()) {
         //         console.log(snapshot.val())
@@ -56,6 +59,15 @@ const MapPopup = props => {
         setGo(false)
     };
 
+
+    useEffect(()=>{
+        onValue(headCountRef, (snapshot) => {
+            const data = snapshot.val()
+            console.log('截图', data)
+            setGoNum(data)
+        });
+
+    }, [info.id])
     return (
         <>
          {/*   header*/}
