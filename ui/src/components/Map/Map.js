@@ -1,7 +1,7 @@
 //再写一个一模一样的这个放在Files
 //点击可以上传坐标至firebase
 import * as React from 'react';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import MapGL, {
     Popup,
     NavigationControl,
@@ -15,8 +15,8 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import Pins from './pins';
 import MapPopup from './MapPopup';
 
-import {get, child, update, set} from "firebase/database";
-import {dbRef, database} from '../firebase'
+import {get, child} from "firebase/database";
+import {dbRef} from '../firebase'
 
 const TOKEN =
     'pk.eyJ1IjoiY2hlbno4NyIsImEiOiJja3VoYjB1ODgyZDJzMm5rNm90NzRjenp4In0.kTrjt38_JFTjLindaWKt8w';

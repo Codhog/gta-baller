@@ -6470,6 +6470,11 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
+goober@^2.0.35:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.1.0.tgz#12e1550ca07e9ebcf70396c30ccc0eb8b2438698"
+  integrity sha512-UdKKZ1boKFaJWlQYlHlp/1jpnrZIkfYWM0zuyQTY7tF9Cs+uHDlQk1kB5vexmZssw4R8iLMjmVUd0wKcaweGfQ==
+
 got@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/got/-/got-8.3.2.tgz#1d23f64390e97f776cac52e5b936e5f514d2e937"
@@ -11149,6 +11154,13 @@ react-firebase-hooks@4.0.0:
   resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-4.0.0.tgz#0e82c6c7a336834dfd73ccdd6897ee4f654396e8"
   integrity sha512-nWumMnve8eD51+aW3hQ6ItgcQB2r5PUXCKWGuJE8PbvCy6GQfVTe0KCX9ACoFq0WMHLDtxhx+WPbqGpnQ3XPQA==
 
+react-hot-toast@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.1.1.tgz#56409ab406b534e9e58274cf98d80355ba0fdda0"
+  integrity sha512-Odrp4wue0fHh0pOfZt5H+9nWCMtqs3wdlFSzZPp7qsxfzmbE26QmGWIh6hG43CukiPeOjA8WQhBJU8JwtWvWbQ==
+  dependencies:
+    goober "^2.0.35"
+
 react-is@^16.12.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.npmmirror.com/react-is/download/react-is-16.13.1.tgz?cache=0&sync_timestamp=1633018598947&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -11158,6 +11170,13 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.npmmirror.com/react-is/download/react-is-17.0.2.tgz?cache=0&sync_timestamp=1633018598947&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Freact-is%2Fdownload%2Freact-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA=
+
+react-loader-spinner@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-loader-spinner/-/react-loader-spinner-4.0.0.tgz#43d9e71b0574219f64216933c28ef5faa12262f6"
+  integrity sha512-RU2vpEej6G4ECei0h3q6bgLU10of9Lw5O+4AwF/mtkrX5oY20Sh/AxoPJ7etbrs/7Q3u4jN5qwCwGLRKCHpk6g==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-map-gl-geocoder@^2.2.0:
   version "2.2.0"

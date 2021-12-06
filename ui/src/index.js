@@ -7,6 +7,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Loginpic from './imgs/login.png';
 import './styles/Login.scss'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export const AuthContext = React.createContext('')
 

@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import "antd/dist/antd.css";
 import Window from "./Window";
-import vchatlogo from "../imgs/vchat.png";
+import vchatlogo from "../imgs/gtaballerlogo.png";
 import {ref, onValue, set} from "firebase/database";
-import { useObject } from 'react-firebase-hooks/database';
+import {useObjectVal} from 'react-firebase-hooks/database';
 import {database} from "./firebase";
 import {Layout, Menu, Button} from "antd";
 import {
@@ -24,7 +24,7 @@ const Main = (props) => {
     const [court, setCourt] = useState(0)
     const AuthValue = useContext(AuthContext)
 
-    const [snapshot] = useObject(ref(database, 'userGroups/'+AuthValue.uid));
+    const [groups] = useObjectVal(ref(database, 'userGroups/'+AuthValue.uid));
 
     // useEffect(()=>{
     //     // onValue(ref(database, 'userGroups/'), (snapshot) => {
@@ -58,11 +58,11 @@ const Main = (props) => {
                     </Menu.Item>
 
                     <SubMenu key="sub2" icon={<TeamOutlined/>} title="Your Local Groups">
-                        {/*{snapshot && console.log(snapshot.val())}*/}
+                        {groups && console.log(groups)}
                         {/*{snapshot && snapshot.val().map((val, ind)=>console.log(val, ind))}*/}
-                        {snapshot?
+                        {groups?
                             (
-                                snapshot.val().map(
+                                Object.values(groups).map(
                                     (val,ind)=><Menu.Item key={'sub'+ind} onClick={()=>handleChatClick(4, val.cid)}>{val.court}</Menu.Item>)
                             )
                             :

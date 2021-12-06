@@ -4,8 +4,9 @@ import {Button, Col, Row, Divider, Menu} from 'antd';
 import MeetEvent from "./MeetEvent";
 import {Chart} from "./Chart/Chart"
 import {useContext, useEffect, useState} from "react";
-import {ref, onValue, set} from "firebase/database";
-import {database} from '../firebase'
+import toast, { Toaster } from 'react-hot-toast';
+import {ref, onValue, set, push, get, child} from "firebase/database";
+import {database, dbRef} from '../firebase'
 import {AuthContext} from '../../index'
 
 
@@ -15,21 +16,25 @@ const MapPopup = props => {
     const courtName = info.court
     const pathName = courtName.replace(/\s+/g, '_').toLowerCase()
 
-    const [go, setGo] = useState(false)
-    const [goNum, setGoNum] = useState(null)
+    const [go, setGo] = useState(null)
+    // const [goNum, setGoNum] = useState(null)
 
     const AuthValue = useContext(AuthContext);
     // const headCountRef = ref(database, 'courtInfo/'+info.id+'/manNum')
     // const userEmail = userName.email.split('@')[0]
-    const handleIntClick = () => {
+    const userGroup = ref(database, 'userGroups/'+AuthValue.uid)
+    const handleIntClick = async () => {
         // Get interested head count before updating
         // Check if initial state is empty
-        // console.log(userName.email, 'sada', typeof info.id)
         setGo(true);
+        const headCountRef = ref(database, 'courtInfo/'+info.id+'/manNum')
 
-        // set(ref(database, 'userGroups/'+AuthValue.uid),
-        //     [{'0': 'Aaniin'},{'3':"West End YMCA"}]
-        // );
+        const newGroupRef = push(userGroup);
+
+        await set(newGroupRef,
+            {"cid": info.id, "court": info.court}
+        );
+        toast('You can chat with others in local groups now.');
         // set(ref(database, 'groupChat/'+info.id),
         //     [{'uid': AuthValue.uid, 'text':'Hello Peter', 'avatar':AuthValue.photoURL}]
         // );
@@ -67,7 +72,34 @@ const MapPopup = props => {
     const handleNotIntClick = () => {
         setGo(false)
     };
-
+    useEffect(()=>{
+        get(userGroup).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val(), 'mapData')
+                Object.values(snapshot.val()).filter((val)=>{
+                    if(val.cid===info.id){
+                        setGo(true);
+                    }
+                })
+            } else {
+                console.error('firebase not getting query')
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }, [])
+    // useEffect(()=>{
+    //     get(child(userGroup, 'courtInfo/')).then((snapshot) => {
+    //         if (snapshot.exists()) {
+    //             // console.log(snapshot.val(), 'mapData')
+    //             setGo(true);
+    //         } else {
+    //             setGo(false)
+    //         }
+    //     }).catch((error) => {
+    //         console.error(error);
+    //     });
+    // }, [props])
 
     // useEffect(()=>{
     //     onValue(headCountRef, (snapshot) => {
@@ -78,8 +110,32 @@ const MapPopup = props => {
     //
     // }, [info.id])
     return (
+
         <>
-         {/*   header*/}
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                gutter={8}
+                containerClassName=""
+                containerStyle={{}}
+                toastOptions={{
+                    // Define default options
+                    className: '',
+                    duration: 5000,
+                    style: {
+                        background: '#363636',
+                        color: '#fff',
+                    },
+                    // Default options for specific types
+                    success: {
+                        duration: 3000,
+                        theme: {
+                            primary: 'green',
+                            secondary: 'black',
+                        },
+                    },
+                }}
+            />
          <Row>
              <Divider>{courtName}</Divider>
              </Row>
@@ -94,34 +150,37 @@ const MapPopup = props => {
                     </Col>
                 </Row>
 
-            <Divider>Popularity of last 7 days {`${info.manNum}`}</Divider>
+            <Divider>Popularity of last 7 days {`${info.manNum}`}, people are coming</Divider>
             <Row justify="space-around" align="middle">
                 <div className='chart-wrapper'>
                     <Chart />
                 </div>
             </Row>
-            <Divider>Are you coming?</Divider>
-            <Row>
-                <Col span={12} offset={7}>
-                    {
-                        go ?
-                            <>
+            {
+                go?(
+                    <>
+                        <Divider>It's your court</Divider>
+                        <Row>
+                            <Col span={12} offset={7}>
                                 <Button onClick={handleNotIntClick}>Not Interested</Button>
                                 <span>&emsp;</span>
-                                <Button types='primary' onClick={handleIntClick}>I'm interested</Button>
-                            </>
+                                <Button types='primary' disabled>I'm interested</Button>
+                            </Col>
 
-                            :
-                            <>
-                                <Button danger onClick={handleNotIntClick}>Not Interested</Button>
-                                <span>&emsp;</span>
-                                <Button onClick={handleIntClick}>I'm interested</Button>
-                            </>
+                        </Row>
+                    </>
+                ):(<>
+                    <Divider>Are you coming?</Divider>
+                    <Row>
+                        <Col span={12} offset={7}>
+                            <Button danger disabled>Not Interested</Button>
+                            <span>&emsp;</span>
+                            <Button onClick={handleIntClick}>I'm interested</Button>
+                        </Col>
 
-                    }
-                </Col>
-
-            </Row>
+                    </Row>
+                </>)
+            }
         </>
     );
 };
