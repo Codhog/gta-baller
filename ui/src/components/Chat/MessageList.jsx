@@ -4,8 +4,7 @@ import React, { memo } from "react";
 // {value.map((values, i) => <MessageEach key={i+1} sender={values.sender} time={time} text={values.text}/>)}
 // const areEqual = (prevProps, nextProps) => true;
 
-// The updates to context values doesn't trigger re-render for all the children of the 
-// provider, rather only components that are rendered from within the Consumer
+
 const MessageEach = memo(function MessageEach(props){
   const time = "上午8:45:25";
   console.log(props)
