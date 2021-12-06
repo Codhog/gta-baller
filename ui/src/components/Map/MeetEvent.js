@@ -4,9 +4,8 @@ import {AuthContext} from '../../index'
 
 const MeetEvent = (props) => {
     const {sonInfo} = props
-    const userName = useContext(AuthContext);
-    const userEmail = userName.email.split('@')[0]
-    console.log('UsErName', userName)
+    // const userName = useContext(AuthContext);
+    // const userEmail = userName.email.split('@')[0]
 
 
     return (

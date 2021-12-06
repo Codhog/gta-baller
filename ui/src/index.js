@@ -5,10 +5,24 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Main from "./components/Main";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {Row, Col, Button} from "antd";
+import Loginpic from './imgs/login.png';
 import './styles/Login.scss'
+
 export const AuthContext = React.createContext('')
 
+// const DatabaseValue = () => {
+//     const [snapshot, loading, error] = useObject(ref(database, 'courtInfo/'));
+//
+//     return (
+//         <div>
+//             <p>
+//                 {error && <strong>Error: {error}</strong>}
+//                 {loading && <span>Value: Loading...</span>}
+//                 {snapshot && <span>Value: {snapshot.val()}</span>}
+//             </p>
+//         </div>
+//     );
+// };
 const Login = () => {
     const auth = getAuth();
     const [user] = useAuthState(auth);
@@ -44,26 +58,12 @@ const Login = () => {
             </AuthContext.Provider>
             :
             (
-                <Button type="primary" className='login-button' onClick={signIn}>
-                     Log in with your Google Account
-                    </Button>
+                <div onClick={signIn} className='login-button'>
+                    <img src={Loginpic}  alt='Login with Google'/>
+                </div>
+
             )
-            // (
-            //     <Row>
-            //         <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-                        
-            //         </Col>
-            //         <Col xs={20} sm={16} md={12} lg={8} xl={4}>
-            //         <Button type="primary" className='login-button' onClick={signIn}>
-            //          Log in with your Google Account
-            //         </Button>
-            //         </Col>
-            //         <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-                        
-            //         </Col>
-            //     </Row>
-                
-            // )
+
 
 
 

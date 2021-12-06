@@ -74,27 +74,26 @@ const users = new Map()
 // });
 
 
-app.get('/api', (req,res)=>{  
-    let _myid = req.query.rid
-    console.log('ReceivedID', _myid);
-    // let _keyArr = chatHistory.map(x => Object.keys(x)[0])
-    // console.log(_keyArr);
-    let _thisChatHistory = chatHistory.filter((obj)=>{
-        console.log(obj.room);
-        return (obj.room.includes(_myid))
-    })
-    // console.log(result, 'result');
-    // for(key in _keyArr){
-    //     console.log(_keyArr[key]);
-    //     if(_keyArr[key].includes(_myid)){
-    //         console.log('done'); 
-    //         _thisChatHistory.push(chatHistory[key])
-    //     }
-    // }
-    console.log(_thisChatHistory);
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send(JSON.stringify(_thisChatHistory));
-}) 
+// app.get('/api', (req,res)=>{
+//     let _myid = req.query.rid
+//     console.log('ReceivedID', _myid);
+//     // let _keyArr = chatHistory.map(x => Object.keys(x)[0])
+//     // console.log(_keyArr);
+//     let _thisChatHistory = chatHistory.filter((obj)=>{
+//         console.log(obj.room);
+//         return (obj.room.includes(_myid))
+//     })
+//     // console.log(result, 'result');
+//     // for(key in _keyArr){
+//     //     console.log(_keyArr[key]);
+//     //     if(_keyArr[key].includes(_myid)){
+//     //         console.log('done');
+//     //         _thisChatHistory.push(chatHistory[key])
+//     //     }
+//     // }
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.send(JSON.stringify(_thisChatHistory));
+// })
     
 io.on('connection', (socket)=>{
 
@@ -115,4 +114,7 @@ io.on('connection', (socket)=>{
 server.listen(3030, () => {
     console.log(`socket启动于 *:${port}`);
   });
+
+exports.widgets = functions.https.onRequest(app);
+// exports.widgets = functions.https.onRequest(server);
 

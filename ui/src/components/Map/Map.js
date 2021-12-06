@@ -17,7 +17,6 @@ import MapPopup from './MapPopup';
 
 import {get, child, update, set} from "firebase/database";
 import {dbRef, database} from '../firebase'
-//"city":"New York","population":,"image":,"state":,"latitude":,"longitude":
 
 const TOKEN =
     'pk.eyJ1IjoiY2hlbno4NyIsImEiOiJja3VoYjB1ODgyZDJzMm5rNm90NzRjenp4In0.kTrjt38_JFTjLindaWKt8w';
@@ -66,7 +65,7 @@ export default function Map() {
     useEffect(()=>{
         get(child(dbRef, 'courtInfo/')).then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val(), 'mapData')
+                // console.log(snapshot.val(), 'mapData')
                 setMapData(snapshot.val());
             } else {
                 console.log('nop data')
