@@ -26,8 +26,7 @@ const Main = (props) => {
     const {user, googleLogin: handleGoogleLogin} = props
     //Slider Collapsed
     const [collapsed, setCollapsed] = useState(false)
-    //Modal Visible
-    const [visible, setVisible] = React.useState(false);
+
 
     const [signedIn, isSignedIn] = React.useState(false);
     const [tab, setTab] = useState(1)
@@ -47,17 +46,7 @@ const Main = (props) => {
         setCourt(courtID)
     }
 
-    const signInModalOpen = () =>{
-        setVisible(true);
-        console.log(user)
-    }
 
-    const signInModalCancel = () =>{
-        setVisible(false);
-    }
-    const signInModalOk = () =>{
-        setVisible(false);
-    }
 
     const LoggedInLayout = () =>{
         return (
@@ -121,20 +110,9 @@ const Main = (props) => {
                             Talk to Admin
                         </Menu.Item>
                         {/* 分离 是否等陆 的逻辑*/}
-
-                            <SubMenu key="sub2" icon={<TeamOutlined/>} title="Sign with Google">
-                                <Menu.Item key="80" onClick={signInModalOpen}>Sign in
-
-                                </Menu.Item>
-                                <Modal
-                                    // title="Title"
-                                    visible={visible}
-                                    onOk={signInModalOk}
-                                    // confirmLoading={confirmLoading}
-                                    onCancel={signInModalCancel}
-                                >
-                                </Modal>
-                            </SubMenu>
+                        <SubMenu key="sub2" icon={<TeamOutlined/>} title="Local Groups Chat">
+                            <LoginModal googleLoginFunc={handleGoogleLogin}/>
+                        </SubMenu>
 
                     </Menu>
                 </Sider>
@@ -157,13 +135,57 @@ const Main = (props) => {
     }
 
 
-    return (
-                <NotLoggedInLayout />
-    );
+    return (<NotLoggedInLayout />);
 
 
 }
 
+const LoginModal = (props) =>{
+    //Modal Visible
+    const {googleLoginFunc} = props
+    const [visible, setVisible] = React.useState(false);
+    const signInModalOpen = () =>{
+        setVisible(true);
+    }
 
+    const signInModalCancel = () =>{
+        setVisible(false);
+    }
+    const signInModalOk = () =>{
+        setVisible(false);
+    }
+    return (
+        <>
+            <Menu.Item key="80" mode="inline" onClick={signInModalOpen}>Please sign in to use Chat
+            </Menu.Item>
+            <Modal
+                title="Sign In"
+                visible={visible}
+                onOk={signInModalOk}
+                // confirmLoading={confirmLoading}
+                onCancel={signInModalCancel}
+                footer={[
+                    <Button key="back" onClick={signInModalCancel}>
+                        Return
+                    </Button>,
+                    // <Button key="submit" type="primary" loading={loading} onClick={this.handleOk}>
+                    //     Submit
+                    // </Button>,
+                    <Button
+                        key="link"
+                        // href="https://google.com"
+                        type="primary"
+                        // loading={loading}
+                        onClick={googleLoginFunc}
+                    >
+                        Search on Google
+                    </Button>,
+                ]}
+            >
+            </Modal>
+        </>
+
+    )
+}
 
 export default Main
