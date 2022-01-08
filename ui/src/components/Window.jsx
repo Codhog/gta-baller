@@ -28,8 +28,8 @@ const Window = (props) => {
                 return <Map />
             case 3:
                 return <AIChat />
-            // case 4:
-            //     return <GroupChat room={}/>
+            case 4:
+                return <GroupChat room={props.roomNum}/>
             default:
                 return <>
                     <Header style={{backgroundColor: "white"}}>Loading...</Header>
