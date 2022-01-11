@@ -2,13 +2,16 @@ import React, {Component, useState} from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Main from "./components/Main";
+import LoginApp from "./components/LoginApp";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from "./components/firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Loginpic from './imgs/login.png';
 import './styles/Login.scss'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Layout, {Footer, Header} from "antd/es/layout/layout";
+import NoLoginApp from "./components/NoLoginApp";
+import Window from "./components/Window";
 
 
 const App = () => {
@@ -44,6 +47,27 @@ const App = () => {
             });
     }
 
-    return <Main  user={user} googleLogin={GoogleLogin} />;
+    return(
+        <Layout style={{minHeight: "100vh"}}>
+            {/*{user?}*/}
+            <NoLoginApp />
+
+            <Layout className="site-layout">
+
+                <Header style={{textAlign: "right"}}>
+                    <a className='Header-Sign-In' >Sign in/Register</a>
+                </Header>
+
+                {/*  court means 0 , 1, 2 courtID*/}
+                {/*<Window tabNum={1} roomNum={court} />*/}
+                <Window tabNum={1}  />
+
+                <Footer style={{textAlign: "center"}}>
+                    GTA-Baller ©2021 Created by Codhog
+                </Footer>
+            </Layout>
+        </Layout>
+
+        );
 }
 ReactDOM.render(<App />, document.getElementById("root"));

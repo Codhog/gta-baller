@@ -1,31 +1,42 @@
-// import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
-// const GoogleLogin = (authProps) => {
-//     const provider = new GoogleAuthProvider();
-//     const auth = getAuth();
-//     signInWithPopup(auth, provider)
-//         .then((result) => {
-//             // This gives you a Google Access Token. You can use it to access the Google API.
-//             const credential = GoogleAuthProvider.credentialFromResult(result);
-//             const token = credential.accessToken;
-//             // The signed-in user info.
-//             const res = {'user':result.user, 'res': result};
-//             console.log(`user:${user} `)
-//             return res
-//         })
-//         .then(({user,res})=>{
-//
-//         })
-//         .catch((error) => {
-//             // Handle Errors here.
-//             // const errorCode = error.code;
-//             const errorMessage = error.message;
-//             // The email of the user's account used.
-//             // const email = error.email;
-//             console.log(`出错了${errorMessage}`)
-//             // The AuthCredential type that was used.
-//             // const credential = GoogleAuthProvider.credentialFromError(error);
-//             // ...
-//         });
-// }
-//
-// export default GoogleLogin
+import React from 'react';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+
+// Configure Firebase.
+const config = {
+    apiKey: "AIzaSyDlBFrUTOF7J6NvJlqeABSdtYKOr4qgiXs",
+    authDomain: "gta-baller.firebaseapp.com",
+    databaseURL: "https://gta-baller-default-rtdb.firebaseio.com",
+    projectId: "gta-baller",
+    storageBucket: "gta-baller.appspot.com",
+    messagingSenderId: "184696766878",
+    appId: "1:184696766878:web:af690da82b49bf3a2c968f",
+    measurementId: "G-QZ685H3BSB"
+};
+firebase.initializeApp(config);
+
+// Configure FirebaseUI.
+const uiConfig = {
+    // Popup signin flow rather than redirect flow.
+    signInFlow: 'popup',
+    // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+    signInSuccessUrl: '/signedIn',
+    // We will display Google and Facebook as auth providers.
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    ],
+};
+
+function SignInScreen() {
+    return (
+        <div>
+            <h1>My App</h1>
+            <p>Please sign-in:</p>
+            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        </div>
+    );
+}
+
+export default SignInScreen
