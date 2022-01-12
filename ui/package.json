@@ -1,6 +1,6 @@
 {
   "name": "gta-baller",
-  "version": "2.1.0",
+  "version": "3.15.0",
   "private": true,
   "dependencies": {
     "@chatui/core": "^1.2.2",

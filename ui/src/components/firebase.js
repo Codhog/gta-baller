@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref} from "firebase/database";
-
+import { getAuth } from "firebase/auth";
 const firebaseConfig = {
     apiKey: "AIzaSyDlBFrUTOF7J6NvJlqeABSdtYKOr4qgiXs",
     authDomain: "gta-baller.firebaseapp.com",
@@ -12,5 +12,6 @@ const firebaseConfig = {
     measurementId: "G-QZ685H3BSB"
 };
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app)
 export const database = getDatabase(app);
 export const dbRef = ref(getDatabase());
