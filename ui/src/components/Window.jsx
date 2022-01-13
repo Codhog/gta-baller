@@ -16,7 +16,7 @@ const Window = (props) => {
 
     const selectedComponent = () => {
         // console.log('tabnum', props.tabNum)
-        switch (props.tabNum) {
+        switch (tabNum) {
             case 0:
                 return  <div>
                     <p>

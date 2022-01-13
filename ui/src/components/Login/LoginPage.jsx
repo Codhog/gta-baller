@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 // import { signInAnonymously } from "firebase/auth";
 import {signInWithPopup, GoogleAuthProvider, onAuthStateChanged} from "firebase/auth";
-import {auth} from './firebase'
+import {auth} from '../firebase'
 import {Form, Input, Button, Checkbox} from 'antd';
-import GoogleLoginButton from '../imgs/GoogleLogin.png'
+import GoogleLoginButton from '../../imgs/GoogleLogin.png'
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "./UserAuthContext";
+import {useAuth} from "../../context/UserAuthContext";
 
 // console.log(GoogleLoginButton)
 const provider = new GoogleAuthProvider();

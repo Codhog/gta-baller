@@ -1,22 +1,19 @@
 import React, {useContext, useEffect, useState} from "react";
 import "antd/dist/antd.css";
-import Window from "./Window";
+import Window from "../Window";
 // css
 import {Layout, Menu, Button} from "antd";
-import vchatlogo from "../imgs/gtaballerlogo.png";
+import vchatlogo from "../../imgs/gtaballerlogo.png";
 import {
     DesktopOutlined,
     PieChartOutlined,
     TeamOutlined,
 } from "@ant-design/icons";
 import {Footer, Header} from "antd/es/layout/layout";
-import {Link} from "react-router-dom";
 import {useList, useListVals, useObjectVal} from "react-firebase-hooks/database";
-import {database, auth} from "./firebase";
+import {database, auth} from "../firebase";
 import {getDatabase, ref} from "firebase/database";
-import {  signOut } from "firebase/auth";
-import {AuthContext} from '../index'
-import {useAuth} from "./UserAuthContext";
+import {useAuth} from "../../context/UserAuthContext";
 const {Sider} = Layout;
 const {SubMenu} = Menu;
 
@@ -31,11 +28,8 @@ const LoginApp = () => {
     const [tab, setTab] = useState(1)
     const [court, setCourt] = useState(0)
 
-    // const [user, loading, error] = useAuthState(auth);
     const [groups, loading, error] = useListVals(ref(database, 'userGroups/'+ uid));
 
-    // const groups = []
-    // const
     const onCollapse = collapsed =>{
         setCollapsed(collapsed)
     }

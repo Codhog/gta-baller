@@ -1,17 +1,20 @@
 import {Menu} from "antd";
 import {DesktopOutlined, PieChartOutlined, TeamOutlined} from "@ant-design/icons";
-import vchatlogo from "../imgs/gtaballerlogo.png";
+import vchatlogo from "../../imgs/gtaballerlogo.png";
 import Sider from "antd/es/layout/Sider";
 import {useState} from "react";
 import Layout, {Footer, Header} from "antd/es/layout/layout";
 import {Link} from "react-router-dom";
-import Window from "./Window";
+import Window from "../Window";
 
 const {SubMenu} = Menu;
 
 const NoLoginApp = () =>{
-    const [collapsed, setCollapsed] = useState(false)
+
+
     const [tab, setTab] = useState(1)
+    const [collapsed, setCollapsed] = useState(false)
+
     const onCollapse = collapsed =>{
         setCollapsed(collapsed)
     }
@@ -43,8 +46,8 @@ const NoLoginApp = () =>{
                 </Header>
 
                 {/*  court means 0 , 1, 2 courtID*/}
-                <Window tabNum={tab}  />
-
+                <Window tabNum={tab} />
+                
                 <Footer style={{textAlign: "center"}}>
                     GTA-Baller ©2021 Created by Codhog
                 </Footer>

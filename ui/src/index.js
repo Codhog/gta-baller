@@ -2,17 +2,17 @@ import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import LoginApp from "./components/LoginApp";
+import LoginApp from "./components/Login/LoginApp";
 import './styles/Login.scss'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Layout, {Footer, Header} from "antd/es/layout/layout";
-import NoLoginApp from "./components/NoLoginApp";
+import NoLoginApp from "./components/Login/NoLoginApp";
 import { HashRouter, Routes, Route, Link } from 'react-router-dom';
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/Login/LoginPage";
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from './components/firebase'
 import {createContext} from "react";
-import {AuthProvider, useAuth} from "./components/UserAuthContext";
+import {AuthProvider, useAuth} from "./context/UserAuthContext";
 
 export const AuthContext = createContext({});
 

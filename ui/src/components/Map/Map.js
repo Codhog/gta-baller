@@ -17,6 +17,8 @@ import MapPopup from './MapPopup';
 
 import {get, child} from "firebase/database";
 import {dbRef} from '../firebase'
+import {useAuth} from "../../context/UserAuthContext";
+import FakeMapPopUp from "./FakeMapPopUp";
 
 const TOKEN =
     'pk.eyJ1IjoiY2hlbno4NyIsImEiOiJja3VoYjB1ODgyZDJzMm5rNm90NzRjenp4In0.kTrjt38_JFTjLindaWKt8w';
@@ -50,7 +52,7 @@ export default function Map() {
 
     const [mapData, setMapData] = useState(null)
 
-
+    const { currentUser } = useAuth()
     const [viewport, setViewport] = useState({
         latitude: 43.85195,
         longitude: -79.26603,
@@ -65,7 +67,7 @@ export default function Map() {
     useEffect(()=>{
         get(child(dbRef, 'courtInfo/')).then((snapshot) => {
             if (snapshot.exists()) {
-                // console.log(snapshot.val(), 'mapData')
+                console.log(snapshot.val(), 'mapData')
                 setMapData(snapshot.val());
             } else {
                 console.log('nop data')
@@ -94,7 +96,7 @@ export default function Map() {
                 />
                 {mapData && <Pins data={mapData}  onClick={setPopupInfo}/>}
 
-
+                {popupInfo && console.log(popupInfo)}
                 {popupInfo && (
                     <Popup
                         tipSize={8}
@@ -104,7 +106,7 @@ export default function Map() {
                         closeOnClick={false}
                         onClose={setPopupInfo}
                     >
-                        <MapPopup info={popupInfo} />
+                        {currentUser?<MapPopup info={popupInfo} />:<FakeMapPopUp  info={popupInfo} />}
                     </Popup>
                 )}
 
