@@ -150,7 +150,7 @@ const LoginPage = () => {
                             span: 16,
                         }}
                     >
-                        <img className="picture-button" src={GoogleLoginButton} alt='googlelogin' onClick={handleGoogleLogin}/>
+                        <img className="clickable" src={GoogleLoginButton} alt='googlelogin' onClick={handleGoogleLogin}/>
 
                     </Form.Item>
 

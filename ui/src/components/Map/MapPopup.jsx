@@ -27,7 +27,6 @@ const MapPopup = props => {
     const courtInfo = props.info
     const {id:courtId, court:courtName, manNum} = courtInfo
     const pathName = courtName.replace(/\s+/g, '_').toLowerCase()
-    console.log(`${courtName}courtName`)
     const [go, setGo] = useState(null)
 
     const  {displayName:username, uid, photoURL:avatar}  = useAuth().currentUser

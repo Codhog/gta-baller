@@ -11,6 +11,7 @@ const FakeMapPopUp = props => {
     const courtInfo = props.info
     const {id:courtId, court:courtName, manNum} = courtInfo
     const pathName = courtName.replace(/\s+/g, '_').toLowerCase()
+    console.log(pathName, '+_+s')
     // 查找用户感兴趣的群组是什么 提前加载好用户是否喜欢了这些场地
     const handleIntClick =  () => {
         toast('You need to log in first.');

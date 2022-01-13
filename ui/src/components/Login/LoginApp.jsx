@@ -76,9 +76,11 @@ const LoginApp = () => {
 
                 <Layout className="site-layout">
                     <Header style={{textAlign: "right"}}>
-                        {<span className='Header-Sign-In' >Welcome, {username}
-                            <Button onClick={logOut}>Sign Out</Button>
-                        </span>}
+                        <span className='Header-Sign-In' >Welcome, {username}
+                        </span>
+                        &nbsp;&nbsp;&nbsp;
+                        <span className="Header-Sign-Out clickable" onClick={logOut}>Sign Out</span>
+
 
                     </Header>
 
