@@ -10,6 +10,7 @@ import GroupChat from "./Chat/GroupChat";
 
 
 const Window = (props) => {
+    const {roomNum, tabNum} = props
     const [snapshot, loading, error] = useObject(ref(database, 'courtInfo/'));
     // SELECTED component 可以指选择的几个框 ‘欢迎使用’  ‘ 球员地图 ’等
 
@@ -29,7 +30,7 @@ const Window = (props) => {
             case 3:
                 return <AIChat />
             case 4:
-                return <GroupChat room={props.roomNum}/>
+                return <GroupChat room={roomNum}/>
             default:
                 return <>
                     <Header style={{backgroundColor: "white"}}>Loading...</Header>

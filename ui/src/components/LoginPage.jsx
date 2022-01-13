@@ -5,12 +5,13 @@ import {auth} from './firebase'
 import {Form, Input, Button, Checkbox} from 'antd';
 import GoogleLoginButton from '../imgs/GoogleLogin.png'
 import {Link, useNavigate} from "react-router-dom";
+import {useAuth} from "./UserAuthContext";
 
 // console.log(GoogleLoginButton)
 const provider = new GoogleAuthProvider();
-const LoginPage = (props) => {
-    const {user, handleSetUser} = props
+const LoginPage = () => {
     const navigate = useNavigate()
+    const { googleLogin } = useAuth()
     const onFinish = (values) => {
         console.log('Success:', values);
         navigate('/')
@@ -19,6 +20,15 @@ const LoginPage = (props) => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const handleGoogleLogin = async () =>{
+        try{
+            await googleLogin()
+            navigate('/')
+        } catch{
+            console.log('Login Error')
+        }
+    }
 
     // const anonymousLogin = () =>{
     //     signInAnonymously(auth)
@@ -33,30 +43,7 @@ const LoginPage = (props) => {
     //         });
     // }
 
-    const googleLogin = () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                // const credential = GoogleAuthProvider.credentialFromResult(result);
-                // const token = credential.accessToken;
-                // The signed-in user info.
-                // const user = result.user;
-                handleSetUser(result)
-                console.log(result)
 
-                // setUser()
-                // ...
-            }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-        });
-    }
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -163,7 +150,7 @@ const LoginPage = (props) => {
                             span: 16,
                         }}
                     >
-                        <img className="picture-button" src={GoogleLoginButton} alt='googlelogin' onClick={googleLogin}/>
+                        <img className="picture-button" src={GoogleLoginButton} alt='googlelogin' onClick={handleGoogleLogin}/>
 
                     </Form.Item>
 
