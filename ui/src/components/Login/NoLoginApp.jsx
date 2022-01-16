@@ -4,6 +4,7 @@ import vchatlogo from "../../imgs/gtaballerlogo.png";
 import Sider from "antd/es/layout/Sider";
 import {useState} from "react";
 import Layout, {Footer, Header} from "antd/es/layout/layout";
+import {Button} from 'antd';
 import {Link} from "react-router-dom";
 import Window from "../Window";
 
@@ -42,7 +43,10 @@ const NoLoginApp = () =>{
 
             <Layout className="site-layout">
                 <Header style={{textAlign: "right"}}>
-                    <Link to="/login" >Sign in/Register</Link>
+                <Button type="primary" shape="round" size='small'>
+                <Link to="/login" >Sign in/Register</Link>
+                </Button>
+                    {/* <Link to="/login" >Sign in/Register</Link> */}
                 </Header>
 
                 {/*  court means 0 , 1, 2 courtID*/}
