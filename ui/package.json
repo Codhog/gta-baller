@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.13",
     "chart.js": "^3.6.0",
+    "dotenv": "^16.0.0",
     "firebase": "^9.6.2",
     "mapbox-gl": "^2.5.1",
     "node-sass": "^6.0.1",

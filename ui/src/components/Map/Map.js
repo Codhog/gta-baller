@@ -20,8 +20,7 @@ import {dbRef} from '../firebase'
 import {useAuth} from "../../context/UserAuthContext";
 import FakeMapPopUp from "./FakeMapPopUp";
 
-const TOKEN =
-    'pk.eyJ1IjoiY2hlbno4NyIsImEiOiJja3VoYjB1ODgyZDJzMm5rNm90NzRjenp4In0.kTrjt38_JFTjLindaWKt8w';
+const TOKEN = process.env.MAP_GL_TOKEN
 
 
 const geolocateStyle = {

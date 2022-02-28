@@ -98,8 +98,8 @@ const GroupChat = (props) => {
 // The updates to context values doesn't trigger re-render for all the children of the
 // provider, rather only components that are rendered from within the Consumer
 const MessageEach = memo(function MessageEach(props){
-    const time = "上午8:45:25";
-    console.log(props)
+    // const time = "上午8:45:25";
+    // console.log(props)
     const {avatar, text, uid} = props
     const AuthValue = useContext(AuthContext)
     const ClassName = AuthValue.uid!==uid?"sent-text-lis":"messages-text-lis"
